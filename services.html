@@ -1,0 +1,42 @@
+<li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="glyphicon glyphicon-star"></i>';
+
+                                if($_SESSION['role'] == "Administrator"){
+                                    $user = mysqli_query($con,"SELECT * from tbl_admin where id = '".$_SESSION['userid']."' ");
+                                    while($row = mysqli_fetch_array($user)){
+                                        $_SESSION['user'] = $row['accounttype'];
+                                        echo'<span>'.$row['accounttype'].'<i class="caret"></i></span>';
+                                    }
+                                }
+                                elseif($_SESSION['role'] == "Member"){
+                                    $user = mysqli_query($con,"SELECT * from tbl_member where id = '".$_SESSION['userid']."' ");
+                                    while($row = mysqli_fetch_array($user)){
+                                        $_SESSION['user'] = $row['name'];
+                                        echo'<span>'.$row['name'].'<i class="caret"></i></span>';
+                                    }
+                                }
+                                
+
+                            echo '</a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header bg-light-blue">
+                                    
+                                    <p>
+                                        '.$_SESSION['user'].'
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat" data-toggle="modal" data-target="#editProfileModal">Edit Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
